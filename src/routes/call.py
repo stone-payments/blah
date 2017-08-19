@@ -8,7 +8,6 @@ async def create_call(request):
     if not request.json:
         return json(return_data, status=400)
     call_details = request.json
-    
     data = add_call(call_details['file_uri'], call_details['metadata'])
     return_data['data'] = {
         'id': str(data.get('id')), 
@@ -25,4 +24,4 @@ async def create_call(request):
             'provider': analysis.get('provider')
         })
     return_data['success'] = True
-    return json(return_data)
+    return json(return_data, status=201)
