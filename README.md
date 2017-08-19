@@ -13,6 +13,10 @@ Blah.
 To activate on UNIX-based systems: `source venv/bin/activate`.
 To deactivate: `deactivate`.
 
+## Requirements
+
+`pip install -r requirements.txt`
+
 ## Running the project
 
 `python src/run.py`
