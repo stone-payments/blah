@@ -29,7 +29,7 @@ authentication:
 ### When running locally, use the Google Cloud SDK
 
 
-        `gcloud auth application-default login`
+        gcloud auth application-default login
 
 
 ### When running on App Engine or Compute Engine, credentials are already
@@ -42,7 +42,7 @@ authentication:
    the path to the key file, for example:
 
 
-        `export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json`
+        export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json
 
 
 ## Running the project
