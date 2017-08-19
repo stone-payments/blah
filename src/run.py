@@ -5,8 +5,10 @@ import os
 app = Sanic()
 
 @app.route("/")
-async def test(request):
-    return json({"hello": "world"})
+async def health_check(request):
+    return json({
+        "message": "Help, I'm alive. My heart keeps beating like a hammer."
+    })
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=os.getenv('PORT', 8080))
+    app.run(host="0.0.0.0", port=os.getenv('PORT', 5000))
