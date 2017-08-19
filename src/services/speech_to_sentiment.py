@@ -1,8 +1,8 @@
 from google.cloud import speech
 
-import services.speech_to_text
-import services.text_to_sentiment
-import services.audio_interface
+from services import speech_to_text
+from services import text_to_sentiment
+from services import audio_interface
 
 def transcribe_file(speech_info):
     client = speech.SpeechClient()

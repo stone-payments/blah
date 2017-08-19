@@ -23,8 +23,10 @@ def add_call(file_uri, metadata):
         call.save()
         out = {}
         for i in call:
-            out[i] = str(call[i])
-        return {"id": out['id'], "file_hash": file_hash, "analysis": [make_analysis(call)]}
+            out[i] = call[i]
+        analysis = []
+        analysis.append(make_analysis(call))
+        return {"id": out['id'], "file_hash": file_hash, "analysis": analysis}
     except mongoengine.errors.ValidationError as e:
         for key in e.errors:
             return [].append('{} - {}'.format(key, e.errors.get(key)))
@@ -46,7 +48,7 @@ def save_analysis(call, provider, result):
         for i in call_analysis:
             if i == 'call':
                 continue
-            out[i] = str(call_analysis[i])
+            out[i] = call_analysis[i]
         return out
 
     except:
