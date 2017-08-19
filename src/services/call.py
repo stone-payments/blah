@@ -26,10 +26,11 @@ def add_call(file_uri, metadata):
             out[i] = call[i]
         analysis = []
         analysis.append(make_analysis(call))
-        return {"id": out['id'], "file_hash": file_hash, "analysis": analysis}
+        return ({"id": out['id'], "file_hash": file_hash, "analysis": analysis}, [])
     except mongoengine.errors.ValidationError as e:
         for key in e.errors:
-            return [].append('{} - {}'.format(key, e.errors.get(key)))
+             messages.append('{} - {}'.format(key, e.errors.get(key)))
+        return None, messages
 
 def make_analysis(call):
     analysis = transcribe_file(call.file_uri)
