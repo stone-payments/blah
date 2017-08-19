@@ -16,12 +16,13 @@ def call_already_exists(file_hash):
     calls = Call.objects(file_hash=file_hash)
     return calls.first()
 
-def make_call(file_uri, metadata):
+def make_call(file_uri, file_hash, metadata):
     call = Call(
             file_hash=file_hash,
             file_uri=file_uri,
             metadata=metadata
         )
+    messages = []
     try:
         call.save()
     except mongoengine.errors.ValidationError as e:
@@ -39,7 +40,7 @@ def add_call(file_uri, metadata):
     messages = []
     analysis = []
     if not call:
-        call, messages = make_call(file_uri, metadata)
+        call, messages = make_call(file_uri, file_hash, metadata)
     for provider in _PROVIDERS:
         al = make_analysis(call, provider)
         analysis.append(al)
