@@ -34,6 +34,7 @@ _PROVIDERS = ['speech_to_sentiment']
 
 def add_call(file_uri, metadata):
     file_hash = md5(file_uri)
+
     call = call_already_exists(file_hash)
     messages = []
     analysis = []

@@ -24,6 +24,7 @@ class CallAnalysis(Document):
         if self.provider == 'speech_to_sentiment':
             data['result'] = {
                 'magnitude': self.result.get('magnitude'), 
-                'score': self.result.get('score')
+                'score': self.result.get('score'),
+                'simplified' : self.result.get('simplified')
             }
         return data
