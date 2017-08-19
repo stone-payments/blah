@@ -1,12 +1,10 @@
-# [START import_libraries]
 import io
 import os
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
-# [END import_libraries]
 
-def decode (speech_info):
+def decode(speech_info):
     if os.path.isfile(speech_info):
         return decode_from_local_path(speech_info)
     else:

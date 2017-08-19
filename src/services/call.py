@@ -1,8 +1,9 @@
+import mongoengine
+import hashlib
+
 from models.call import CallAnalysis
 from models.call import Call
-import mongoengine
-
-import hashlib
+from services.speech_to_sentiment import transcribe_file
 
 def md5(fname):
     hash_md5 = hashlib.md5()
@@ -29,9 +30,8 @@ def add_call(file_uri, metadata):
             return [].append('{} - {}'.format(key, e.errors.get(key)))
 
 def make_analysis(call):
-    # Mock the shit out
-    mockAnalysis = {"tone": -6}
-    return save_analysis(call, 'ixtonéco', mockAnalysis)
+    analysis = transcribe_file(call.file_uri)
+    return save_analysis(call, 'speech_to_sentiment', analysis)
 
 def save_analysis(call, provider, result):
     call_analysis = CallAnalysis(
