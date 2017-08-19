@@ -12,3 +12,7 @@ Blah.
 
 To activate on UNIX-based systems: `source venv/bin/activate`.
 To deactivate: `deactivate`.
+
+## Running the project
+
+`python src/run.py`
