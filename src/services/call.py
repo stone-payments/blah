@@ -12,29 +12,43 @@ def md5(fname):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
 
-def add_call(file_uri, metadata):
-    file_hash = md5(file_uri)
+def call_already_exists(file_hash):
+    calls = Call.objects(file_hash=file_hash)
+    return calls.first()
+
+def make_call(file_uri, metadata):
     call = Call(
-        file_hash=file_hash,
-        file_uri=file_uri,
-        metadata=metadata
-    )
+            file_hash=file_hash,
+            file_uri=file_uri,
+            metadata=metadata
+        )
     try:
         call.save()
-        out = {}
-        for i in call:
-            out[i] = call[i]
-        analysis = []
-        analysis.append(make_analysis(call))
-        return ({"id": out['id'], "file_hash": file_hash, "analysis": analysis}, [])
     except mongoengine.errors.ValidationError as e:
         for key in e.errors:
-             messages.append('{} - {}'.format(key, e.errors.get(key)))
-        return None, messages
+            messages.append('{} - {}'.format(key, e.errors.get(key)))
+        call = None        
+    return call, messages
 
-def make_analysis(call):
-    analysis = transcribe_file(call.file_uri)
-    return save_analysis(call, 'speech_to_sentiment', analysis)
+_PROVIDERS = ['speech_to_sentiment']
+
+def add_call(file_uri, metadata):
+    file_hash = md5(file_uri)
+    call = call_already_exists(file_hash)
+    messages = []
+    analysis = []
+    if not call:
+        call, messages = make_call(file_uri, metadata)
+    for provider in _PROVIDERS:
+        al = make_analysis(call, provider)
+        analysis.append(al)
+    return (call, analysis, messages)
+    
+
+def make_analysis(call, provider):
+    if provider == 'speech_to_sentiment':
+        analysis = transcribe_file(call.file_uri)
+        return save_analysis(call, provider, analysis)
 
 def save_analysis(call, provider, result):
     call_analysis = CallAnalysis(
@@ -42,15 +56,5 @@ def save_analysis(call, provider, result):
         provider=provider,
         result=result
     )
-
-    try:
-        call_analysis.save()
-        out = {}
-        for i in call_analysis:
-            if i == 'call':
-                continue
-            out[i] = call_analysis[i]
-        return out
-
-    except:
-        return {}
+    call_analysis.save()
+    return call_analysis
