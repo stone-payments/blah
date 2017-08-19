@@ -41,3 +41,7 @@ You can create a Service Account key file. This file can be used to authenticate
 ## Running the project
 
 `python src/run.py`
+
+## Recording a sample audio
+
+`arecord -f S16_LE -c1 -r16000 filaname.wav`
