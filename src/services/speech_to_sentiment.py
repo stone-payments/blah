@@ -6,9 +6,8 @@ from services import audio_interface
 
 def transcribe_file(speech_info):
     client = speech.SpeechClient()
-
-    decoded_audio = audio_interface.decode(speech_info)
-    response = speech_to_text.transcribe_audio(decoded_audio[0],decoded_audio[1])
+    config, audio = audio_interface.decode(speech_info)
+    response = speech_to_text.transcribe_audio(config, audio)
     annotations = text_to_sentiment.analyze(response)
     sentiment_result = text_to_sentiment.get_result(annotations)
     
@@ -22,7 +21,6 @@ def get_simplified_analisys(sentiment_result):
     magnitude = sentiment_result["magnitude"]*100
 
     balanced_score = score*magnitude    
-    print(balanced_score)
 
     if (balanced_score >= -15 and balanced_score < 15):
         return "neutral"

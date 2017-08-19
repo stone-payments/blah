@@ -6,4 +6,4 @@ def transcribe_audio(config,audio):
     client = speech.SpeechClient()
 
     response = client.recognize(config, audio)
-    return str(response.results[0].alternatives[0])
+    return str(response.results[0].alternatives[0].transcript)
