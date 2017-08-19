@@ -28,9 +28,8 @@ authentication:
 
 ### When running locally, use the Google Cloud SDK
 
-    .. code-block:: bash
 
-        gcloud auth application-default login
+        `gcloud auth application-default login`
 
 
 ### When running on App Engine or Compute Engine, credentials are already
@@ -42,9 +41,8 @@ authentication:
    the file, set the ``GOOGLE_APPLICATION_CREDENTIALS`` environment variable to
    the path to the key file, for example:
 
-    .. code-block:: bash
 
-        export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json
+        `export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json`
 
 
 ## Running the project
