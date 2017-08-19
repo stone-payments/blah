@@ -2,10 +2,10 @@
 FROM python:3.5
 
 # Set the working directory to /app
-WORKDIR ./
+WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-ADD . ./
+ADD ./requirements.txt /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Run app.py when the container launches
-CMD ["python", "/src/run.py"]
+CMD ["python", "./src/run.py"]
