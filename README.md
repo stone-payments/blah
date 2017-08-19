@@ -32,9 +32,8 @@ authentication:
         gcloud auth application-default login
 
 
-### When running on App Engine or Compute Engine, credentials are already
-   set-up. However, you may need to configure your Compute Engine instance
-   with `additional scopes`_.
+### When running on App Engine or Compute Engine, 
+credentials are already set-up. However, you may need to configure your Compute Engine instance with additional scopes
 
 ### You can create a Service Account key file. This file can be used to
    authenticate to Google Cloud Platform services from any environment. To use
