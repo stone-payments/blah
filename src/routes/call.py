@@ -1,15 +1,13 @@
 from sanic.response import json
 from models.call import Call
+from services.call import add_call
 import mongoengine
 
-async def add_call(request):
+async def create_call(request):
+    call_details = request.json
     return_data = {"messages" : [], "success": False, "data": {}}
-    call = Call()
-    try:
-        call.save()
-        return_data['success'] = True
-    except mongoengine.errors.ValidationError as e:
-        for key in e.errors:
-            return_data['messages'].append('{} - {}'.format(key, e.errors.get(key)))
-       
+
+    return_data['data'] = add_call(call_details['file_uri'], call_details['metadata'])
+    return_data['success'] = True
+    print(return_data)
     return json(return_data)
