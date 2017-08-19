@@ -4,7 +4,6 @@ httptools==0.0.9
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
-pkg-resources==0.0.0
 sanic==0.6.0
 ujson==1.35
 uvloop==0.8.0
