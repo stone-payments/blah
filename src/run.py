@@ -1,6 +1,6 @@
 from sanic import Sanic
 import os
-from routes import health_check
+from routes.health_check import health_check
 
 app = Sanic()
 app.add_route(health_check, '/health-check')
