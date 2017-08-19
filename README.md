@@ -10,5 +10,5 @@ Blah.
 
 ### Using the virtual environment
 
-To activate on UNIX-based systems: `source venv/bin/activate`
-To deactivate: `deactivate`
+To activate on UNIX-based systems: `source venv/bin/activate`.
+To deactivate: `deactivate`.
