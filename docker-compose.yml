@@ -4,7 +4,11 @@ services:
     restart: always
     image: mongo:latest
     ports:
-      - "27017:27017"   
+      - "27017:27017"
+    environment:      
+      BLAHDATA : /data/blah  
+    volumes_from: 
+      - blah_data
   blah:
     restart: always
     build: .
@@ -17,4 +21,13 @@ services:
       - mongo
     depends_on:
       - mongo
+    volumes:
+      - .:/app
+
+  blah_data:
+    image: alpine:latest
+    container_name: blah_data
+    volumes:
+      - /data/blah
+    command: "true"  
 
