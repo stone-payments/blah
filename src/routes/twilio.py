@@ -6,6 +6,6 @@ async def rec_message(request):
     print(str(request))
     response = VoiceResponse()
     response.say("Deixe sua mensagem.")
-    response.record()
+    response.record(maxLength="30")
     response.hangup()
     return str(response)
