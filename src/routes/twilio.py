@@ -5,7 +5,7 @@ from sanic.response import html
 async def rec_message(request):
     print(str(request))
     response = VoiceResponse()
-    response.say(voice='woman', 'Recording...)
+    response.say(voice='woman', 'Recording...')
     response.record()
     return html(str(response))
 
