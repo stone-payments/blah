@@ -1,6 +1,7 @@
 import mongoengine
 import hashlib
 import os
+import hashlib
 
 from datetime import datetime
 
@@ -12,10 +13,13 @@ _PROVIDERS = ['speech_to_sentiment']
 
 def md5(fname):
     hash_md5 = hashlib.md5()
-    with open(fname, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
-    return hash_md5.hexdigest()
+    if os.path.isfile(fname):
+        with open(fname, "rb") as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                hash_md5.update(chunk)
+        return hash_md5.hexdigest()
+    else:
+        return hashlib.md5(fname)
 
 def call_already_exists(file_hash):
     calls = Call.objects(file_hash=file_hash)
