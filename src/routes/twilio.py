@@ -7,7 +7,6 @@ async def rec_message(request):
     response = VoiceResponse()
     response.say('Recording...', voice='woman')
     response.record(recordingStatusCallback='/twilio-record')
-    response.hangout()
     return html(str(response))
 
 async def twilio_recording(request):
