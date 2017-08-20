@@ -4,10 +4,11 @@ from sanic import Sanic
 import mongoengine
 
 from routes.health_check import health_check
-from routes.call import create_call
+from routes.call import create_call, search
 
 app = Sanic()
 app.add_route(create_call, '/call', methods=['POST'])
+app.add_route(search, '/search', methods=['POST'])
 app.add_route(health_check, '/health-check')
 mongoengine.connect('blah', host=os.getenv('MONGO_URL'))
 print('PORRA VAI TOMAR NO CU')
