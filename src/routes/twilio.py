@@ -4,13 +4,12 @@ from sanic.response import text
 
 async def rec_message(request):
     print(str(request))
-    response = VoiceResponse()
+    resp = VoiceResponse()
     print('=============================================')
-    response.say("Hello Hello Hello Hello Hello Hello.")
-    response.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
+    resp.say("Hello Hello Hello Hello Hello Hello.")
 
-    response.record(maxLength="30", action='/twilio-record')
-    return text(str(response))
+    resp.record()
+    return text(str(resp))
 
 async def twilio_recording(request):
     recording_url = request.values.get('RecordingUrl', None)
