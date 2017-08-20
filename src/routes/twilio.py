@@ -1,6 +1,6 @@
 from twilio.twiml.voice_response import Play, VoiceResponse
 from twilio.rest import Client
-from sanic.response import text
+from sanic.response import html
 
 async def rec_message(request):
     print(str(request))
@@ -12,7 +12,7 @@ async def rec_message(request):
     print(response)
 
     response.record()
-    return text(str(response))
+    return html(str(response))
 
 async def twilio_recording(request):
     recording_url = request.values.get('RecordingUrl', None)
