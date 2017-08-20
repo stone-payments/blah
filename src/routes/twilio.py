@@ -11,7 +11,7 @@ async def rec_message(request):
 
     print(response)
 
-    resp.record()
+    response.record()
     return text(str(response))
 
 async def twilio_recording(request):
