@@ -1,6 +1,7 @@
 from twilio.twiml.voice_response import Play, VoiceResponse
 from twilio.rest import Client
 from sanic.response import text, html
+from services.call import add_call
 
 async def rec_message(request):
     response = VoiceResponse()
@@ -10,7 +11,7 @@ async def rec_message(request):
     return html(str(response))
 
 async def twilio_recording(request):
-    print(request)
     recording_url = request.form.get('RecordingUrl', None)
-    print(recording_url)
+    metadata = {"type": "inbound_call", "provider": "twilio"}
+    print(add_call(recording_url, metadata))
     return text('ok')
