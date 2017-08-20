@@ -30,8 +30,10 @@ async def search(request):
     metadata = request.json
     if metadata is None:
         calls = Call.objects()
+        count = Call.objects.count()
     else:
         calls = Call.objects(__raw__=metadata)
+        count = Call.objects(__raw__=metadata).count()
     return_data['data'] = []
     for call in calls:
         r = call.to_json()
@@ -40,4 +42,5 @@ async def search(request):
         for al in analysis:
             r['analysis'].append(al.to_json())
         return_data['data'].append(r)
+    return_data['count'] = count
     return json(return_data, status=200)
