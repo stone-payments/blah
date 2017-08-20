@@ -2,6 +2,8 @@ import mongoengine
 import hashlib
 import os
 
+from datetime import datetime
+
 from models.call import CallAnalysis
 from models.call import Call
 from services.speech_to_sentiment import transcribe_file
@@ -20,6 +22,8 @@ def call_already_exists(file_hash):
     return calls.first()
 
 def make_call(file_uri, file_hash, metadata):
+    if metadata.get('date') is None:
+        metadata['date'] = datetime.now()
     call = Call(
             file_hash=file_hash,
             file_uri=file_uri,
