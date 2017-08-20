@@ -1,12 +1,11 @@
 from twilio.twiml.voice_response import VoiceResponse
 from twilio.rest import Client
-from sanic.response import json
+from sanic.response import text
 
-
-def rec_message(request):
+async def rec_message(request):
     print(str(request))
     response = VoiceResponse()
     response.say("Deixe sua mensagem.")
-    response.record()
+    response.record(maxLength="30")
     response.hangup()
-    return str(response)
+    return text(str(response))

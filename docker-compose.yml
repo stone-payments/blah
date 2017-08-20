@@ -5,15 +5,15 @@ services:
     image: mongo:latest
     ports:
       - "27017:27017"
-    environment:      
-      BLAHDATA : /data/blah  
-    volumes_from: 
+    environment:
+      BLAHDATA : /data/blah
+    volumes_from:
       - blah_data
   blah:
     restart: always
     build: .
     environment:
-      - MONGO_URL=mongo:27017
+      - MONGODB_URI=mongo:27017
       - GOOGLE_APPLICATION_CREDENTIALS=credentials.json
     ports:
       - "5000:5000"
@@ -29,5 +29,5 @@ services:
     container_name: blah_data
     volumes:
       - /data/blah
-    command: "true"  
+    command: "true"
 
