@@ -8,8 +8,9 @@ WORKDIR /app
 ADD ./requirements.txt /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt && \
-    apk add --update ffmpeg
+RUN apk add --update ffmpeg python-dev build-base && \
+pip install -r requirements.txt && \
+rm -rf /var/cache/apk/*
 
 # Make port 80 available to the world outside this container
 EXPOSE 5000
