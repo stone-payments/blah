@@ -19,7 +19,7 @@ def md5(fname):
                 hash_md5.update(chunk)
         return hash_md5.hexdigest()
     else:
-        return hashlib.md5(fname)
+        return hashlib.md5(str(fname)).hexdigest()
 
 def call_already_exists(file_hash):
     calls = Call.objects(file_hash=file_hash)
