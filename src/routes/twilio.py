@@ -7,10 +7,9 @@ async def rec_message(request):
     response = VoiceResponse()
     print('=============================================')
     response.say("Hello Hello Hello Hello Hello Hello.")
-    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
+    response.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
 
     response.record(maxLength="30", action='/twilio-record')
-    response.hangup()
     return text(str(response))
 
 async def twilio_recording(request):
@@ -19,5 +18,5 @@ async def twilio_recording(request):
     print(recording_url)
     resp = VoiceResponse()
     resp.say('Goodbye')
-
+    resp.hangup()
     return text(str(resp))
