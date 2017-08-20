@@ -5,12 +5,7 @@ from sanic.response import html
 async def rec_message(request):
     print(str(request))
     response = VoiceResponse()
-    print('=============================================')
-
-    response.play('https://api.twilio.com/cowbell.mp3', loop=10)
-
-    print(response)
-
+    response.say(voice='woman', 'Recording...)
     response.record()
     return html(str(response))
 
