@@ -31,7 +31,7 @@ async def search(request):
     if metadata is None:
         calls = Call.objects()
     else:
-        calls = Call.objects(metadata=metadata)
+        calls = Call.objects(__raw__=metadata)
     return_data['data'] = []
     for call in calls:
         r = call.to_json()
