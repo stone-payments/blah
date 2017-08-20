@@ -9,7 +9,7 @@ ADD ./requirements.txt /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt && \
-    apk add --update ffmpeg
+    apt update && apt install libav-tools
 
 # Make port 80 available to the world outside this container
 EXPOSE 5000
