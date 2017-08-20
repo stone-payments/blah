@@ -17,7 +17,7 @@ def decode(speech_info):
 def decode_from_url(speech_link):
     #TODO implement random file name
     urllib.request.urlretrieve(speech_link, '/tmp/foo.mp3')
-    sound = AudioSegment.from_mp3('/tmp/foo.mp3').set_channels(1)
+    sound = AudioSegment.from_mp3('/tmp/foo.mp3')
     sound.export('/tmp/foo.wav', format='wav')
 
     return decode_from_local_path('/tmp/foo.wav')
