@@ -21,7 +21,7 @@ def decode_from_url(speech_link):
     urllib.request.urlretrieve(speech_link, '/tmp/{}.mp3'.format(unique_filename))
     subprocess.call(['ffmpeg', '-i', '/tmp/{}.mp3'.format(unique_filename), '/tmp/{}.wav'.format(unique_filename)])
 
-    return decode_from_local_path('/tmp/foo.wav')
+    return decode_from_local_path('/tmp/{}.wav'.format(unique_filename))
 def decode_from_local_path(speech_local_path):
     with io.open(speech_local_path, 'rb') as audio_file:
         content = audio_file.read()
