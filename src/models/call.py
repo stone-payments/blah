@@ -8,7 +8,8 @@ class Call(Document):
     def to_json(self):
         return {
             'id': str(self.id),
-            'file_hash' : self.file_hash
+            'file_hash' : self.file_hash,
+            'metadata' : self.metadata
         }
 
 class CallAnalysis(Document):

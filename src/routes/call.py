@@ -1,6 +1,6 @@
 from sanic.response import json
 from models.call import Call
-from services.call import add_call
+from services.call import add_call, get_analysis_for_call
 import mongoengine
 import json as t
 
@@ -26,15 +26,18 @@ async def create_call(request):
     return json(return_data, status=400)
 
 async def search(request):
-    begin_date = request.json.get('begin-date')
-    end_date = request.json.get('end-date')
-    operator = request.json.get('operator')
-    search_data = request.json.get('search-data')
-    print('{} {} {} {}'.format(begin_date, end_date, operator, search_data))
-    print('{$text: {$search: "' + str(search_data) + '"}}')
-    t = dict()
-    t['$test'] = {'$search' : search_data}
-    print(t)
-    calls = Call.objects(__raw__=t)
-    print(calls)
-    return json(calls.to_json())
+    return_data = {"messages" : [], "success": True, "data": {}}
+    metadata = request.json
+    if metadata is None:
+        calls = Call.objects()
+    else:
+        calls = Call.objects(metadata=metadata)
+    return_data['data'] = []
+    for call in calls:
+        r = call.to_json()
+        r['analysis'] = []
+        analysis = get_analysis_for_call(call)
+        for al in analysis:
+            r['analysis'].append(al.to_json())
+        return_data['data'].append(r)
+    return json(return_data, status=200)
