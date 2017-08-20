@@ -1,18 +1,26 @@
 import io
 import os
+import urllib.request
+
+from pydub import AudioSegment
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
+
 
 def decode(speech_info):
     if os.path.isfile(speech_info):
         return decode_from_local_path(speech_info)
     else:
-         return decode_from_url(speech_info)   
+        return decode_from_url(speech_info)
 
 def decode_from_url(speech_link):
-    raise Exception("Via URL not implemented")
+    #TODO implement random file name
+    urllib.request.urlretrieve(speech_link, '/tmp/foo.mp3')
+    sound = AudioSegment.from_mp3('/tmp/foo.mp3').set_channels(1)
+    sound.export('/tmp/foo.wav', format='wav')
 
+    return decode_from_local_path('/tmp/foo.wav')
 def decode_from_local_path(speech_local_path):
     with io.open(speech_local_path, 'rb') as audio_file:
         content = audio_file.read()
