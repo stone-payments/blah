@@ -1,8 +1,8 @@
 import io
 import os
 import urllib.request
+import subprocess
 
-from pydub import AudioSegment
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
@@ -17,8 +17,7 @@ def decode(speech_info):
 def decode_from_url(speech_link):
     #TODO implement random file name
     urllib.request.urlretrieve(speech_link, '/tmp/foo.mp3')
-    sound = AudioSegment.from_mp3('/tmp/foo.mp3')
-    sound.export('/tmp/foo.wav', format='wav')
+    subprocess.call(['ffmpeg', '-i', '/tmp/foo.mp3', '/tmp/foo.wav'])
 
     return decode_from_local_path('/tmp/foo.wav')
 def decode_from_local_path(speech_local_path):
