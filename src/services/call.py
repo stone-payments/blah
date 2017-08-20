@@ -31,12 +31,12 @@ def make_call(file_uri, file_hash, metadata):
     except mongoengine.errors.ValidationError as e:
         for key in e.errors:
             messages.append('{} - {}'.format(key, e.errors.get(key)))
-        call = None        
+        call = None
     return call, messages
 
 def get_analysis_for_call(call):
     return CallAnalysis.objects(call=call)
-    
+
 def make_analysis(call, provider):
     if provider == 'speech_to_sentiment':
         analysis = transcribe_file(call.file_uri)
@@ -46,7 +46,7 @@ def save_analysis(call, provider, result):
     call_analysis = CallAnalysis(
         call=call,
         provider=provider,
-        result=result
+        result=result,
     )
     call_analysis.save()
     return call_analysis

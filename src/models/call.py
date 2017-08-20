@@ -18,13 +18,14 @@ class CallAnalysis(Document):
 
     def to_json(self):
         data = {
-            'id': str(self.id), 
+            'id': str(self.id),
             'provider': self.provider
         }
         if self.provider == 'speech_to_sentiment':
             data['result'] = {
-                'magnitude': self.result.get('magnitude'), 
+                'magnitude': self.result.get('magnitude'),
                 'score': self.result.get('score'),
-                'simplified' : self.result.get('simplified')
+                'simplified' : self.result.get('simplified'),
+                'transcription': self.result.get('transcription')
             }
         return data
