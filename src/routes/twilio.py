@@ -3,7 +3,7 @@ from twilio.rest import Client
 from sanic.response import json
 
 
-def rec_message(request):
+async def rec_message(request):
     print(str(request))
     response = VoiceResponse()
     response.say("Deixe sua mensagem.")

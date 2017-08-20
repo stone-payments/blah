@@ -34,3 +34,4 @@ urllib3==1.22
 uvloop==0.8.0
 websockets==3.3
 Werkzeug==0.12.2
+twilio==6.0
