@@ -2,6 +2,7 @@ import io
 import os
 import urllib.request
 import subprocess
+import uuid
 
 from google.cloud import speech
 from google.cloud.speech import enums
@@ -16,8 +17,9 @@ def decode(speech_info):
 
 def decode_from_url(speech_link):
     #TODO implement random file name
-    urllib.request.urlretrieve(speech_link, '/tmp/foo.mp3')
-    subprocess.call(['ffmpeg', '-i', '/tmp/foo.mp3', '/tmp/foo.wav'])
+    unique_filename = str(uuid.uuid4())
+    urllib.request.urlretrieve(speech_link, '/tmp/{}.mp3'.format(unique_filename))
+    subprocess.call(['ffmpeg', '-i', '/tmp/{}.mp3'.format(unique_filename), '/tmp/{}.wav'.format(unique_filename)])
 
     return decode_from_local_path('/tmp/foo.wav')
 def decode_from_local_path(speech_local_path):
