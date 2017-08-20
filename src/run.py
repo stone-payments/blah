@@ -15,7 +15,7 @@ app.add_route(create_call, '/call', methods=['POST'])
 app.add_route(search, '/search', methods=['POST'])
 app.add_route(health_check, '/health-check')
 app.add_route(rec_message, '/twilio', methods=['POST'])
-app.add_route(twilio_recording, '/twilio-record')
+app.add_route(twilio_recording, '/twilio-record', methods=['GET', 'POST'])
 mongoengine.connect('blah', host=os.getenv('MONGODB_URI'))
 
 if __name__ == "__main__":

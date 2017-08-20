@@ -6,7 +6,7 @@ async def rec_message(request):
     print(str(request))
     response = VoiceResponse()
     response.say('Recording...', voice='woman')
-    response.record(recordingStatusCallback='/twilio-record')
+    response.record(recording_status_callback='/twilio-record')
     return html(str(response))
 
 async def twilio_recording(request):
