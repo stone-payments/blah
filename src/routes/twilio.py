@@ -17,6 +17,7 @@ async def twilio_recording(request):
     print('++++++++++++++++++++++++++++++++++++++++++++')
     print(recording_url)
     resp = VoiceResponse()
+    resp.say('Listein')
+    res.play(recording_url)
     resp.say('Goodbye')
-    resp.hangup()
     return text(str(resp))
